@@ -1,15 +1,14 @@
 {
-"name": "John Smith",
-"balance": 5000,
-"transactions": [
-{
-"date": "2026-03-01",
-"description": "March Membership Fee",
-"amount": 5000,
-"status": "Pending",
-"payment_link": "https://www.mercadopago.com
-"
-}
-],
-"receipts": []
+  "name": "John Smith",
+  "balance": 5000,
+  "transactions": [
+    {
+      "date": "2026-03-01",
+      "description": "March Membership Fee",
+      "amount": 5000,
+      "status": "Pending",
+      "payment_link": "https://www.mercadopago.com"
+    }
+  ],
+  "receipts": []
 }
