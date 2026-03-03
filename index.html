@@ -1,5 +1,35 @@
+<!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>Club Members Portal</title>
+</head>
 <body>
-Portal funcionando
+
+<h2>Member Login</h2>
+
+<input type="text" id="username" placeholder="Username"><br><br>
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<script>
+async function login() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    let response = await fetch("users.json");
+    let users = await response.json();
+
+    let user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+        window.location.href = "dashboard.html?id=" + user.id;
+    } else {
+        alert("Invalid credentials");
+    }
+}
+</script>
+
 </body>
 </html>

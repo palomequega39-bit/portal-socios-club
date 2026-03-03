@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Member Dashboard</title>
+</head>
+<body>
+
+<h2>Account Status</h2>
+
+<div id="content"></div>
+
+<script>
+async function loadData() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    let response = await fetch("data/" + id + ".json");
+    let member = await response.json();
+
+    let html = "<h3>" + member.name + "</h3>";
+    html += "<p>Outstanding Balance: $" + member.balance + "</p>";
+
+    html += "<h4>Transactions</h4><ul>";
+
+    member.transactions.forEach(t => {
+        html += "<li>" + t.date + " - " + t.description + 
+                " - $" + t.amount + 
+                " - " + t.status;
+
+        if (t.status === "Pending") {
+            html += " <a href='" + t.payment_link + "' target='_blank'>Pay</a>";
+        }
+
+        html += "</li>";
+    });
+
+    html += "</ul>";
+
+    html += "<h4>Receipts</h4><ul>";
+
+    member.receipts.forEach(r => {
+        html += "<li><a href='receipts/" + id + "/" + r.file + "' target='_blank'>" 
+                + r.file + "</a></li>";
+    });
+
+    html += "</ul>";
+
+    document.getElementById("content").innerHTML = html;
+}
+
+loadData();
+</script>
+
+</body>
+</html>
